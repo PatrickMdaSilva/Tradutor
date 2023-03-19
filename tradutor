@@ -17,14 +17,14 @@ with sr.Microphone() as mic:
         if audio != '':
             texto = rec.recognize_google(audio, language="pt-br")
             texto = texto.lower()
-            if 'pergunta' in texto and texto != '':
+            if 'pergunta' in texto:
                 texto = texto.replace('pergunta','')
                 print (trans.translate(f"{texto}", dest='en').text)
                 engine.setProperty('voice', voices[1].id)
                 engine.say(trans.translate(f"{texto}").text)
                 engine.runAndWait()
                 engine.runAndWait()
-
+            
             else:
                 texto = rec.recognize_google(audio, language="en")
                 print (trans.translate(f"{texto}", dest='pt').text)
