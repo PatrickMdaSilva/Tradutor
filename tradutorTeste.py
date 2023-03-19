@@ -1,7 +1,6 @@
 import speech_recognition as sr #https://pypi.org/project/SpeechRecognition/
 import pyttsx3 #https://pypi.org/search/?q=pyttsx3
 from googletrans import Translator #https://pypi.org/project/googletrans2/
-import time
 
 rec = sr.Recognizer()
 engine = pyttsx3.init()
