@@ -27,32 +27,32 @@ with sr.Microphone() as mic:
                     engine.runAndWait()
                     engine.runAndWait()
 
-                elif 'traduza' in texto:
-                    print("Deseja continuar")
+                elif 'inglês' in texto:
+                    print("Deseja continuar com a tradução escrita")
                     audio = rec.listen(mic)
                     texto = rec.recognize_google(audio, language="pt-br")
-                    if 'não' in texto:
-                        print("Saindo")
-                    else:    
-                        texto = input('Quer a tradução só insira o texto! ')
+                    if 'sim' in texto:
+                        texto = input('Escreva! ')
                         print (trans.translate(f"{texto}", dest='en').text)
                         engine.setProperty('voice', voices[1].id)
                         engine.say(trans.translate(f"{texto}").text)
                         engine.runAndWait()
                         engine.runAndWait()
+                    else:    
+                        print("Saindo")
 
-                elif 'inglês' in texto:
-                    print("Would you like to continue")
+                elif 'português' in texto:
+                    print("Would you like to continue with the translation by writing?")
                     audio = rec.listen(mic)
                     texto = rec.recognize_google(audio, language="en") 
-                    if 'no' in texto:
-                        print("exit")
-                    else:       
-                        texto = input('Do you want me to do the translation? ')
+                    if 'yes' in texto:
+                        texto = input('Write? ')
                         print (trans.translate(f"{texto}", dest='pt').text)
                         engine.setProperty('voice', voices[0].id)
                         engine.say(trans.translate(f"{texto}",dest='pt').text)
                         engine.runAndWait()
+                    else:       
+                        print("exit")
 
                 else:
                     texto = rec.recognize_google(audio, language="en")
