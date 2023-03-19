@@ -23,7 +23,6 @@ with sr.Microphone() as mic:
                     engine.setProperty('voice', voices[1].id)
                     engine.say(trans.translate(f"{texto}").text)
                     engine.runAndWait()
-                    engine.runAndWait()
 
                 elif 'inglês' in texto:
                     print("Deseja continuar com a tradução escrita")

@@ -15,8 +15,15 @@ with sr.Microphone() as mic:
         try:
             rec.adjust_for_ambient_noise(mic)
             audio = rec.listen(mic)
-            time.sleep(1)
             if audio != '':
+                portugues = rec.recognize_google(audio, language="pt-br")
+                portugues = portugues.lower
+                portuguesTraducao = trans.translate(f"{portugues}", dest='pt').text
+
+                ingles = rec.recognize_google(audio, language="en")
+                ingles = ingles.lower
+                inglesTraducao = trans.translate(f"{portugues}", dest='en').text
+
                 texto = rec.recognize_google(audio, language="pt-br")
                 texto = texto.lower()
                 if 'pergunta' in texto:
@@ -24,7 +31,6 @@ with sr.Microphone() as mic:
                     print (trans.translate(f"{texto}", dest='en').text)
                     engine.setProperty('voice', voices[1].id)
                     engine.say(trans.translate(f"{texto}").text)
-                    engine.runAndWait()
                     engine.runAndWait()
 
                 elif 'inglês' in texto:
@@ -36,7 +42,6 @@ with sr.Microphone() as mic:
                         print (trans.translate(f"{texto}", dest='en').text)
                         engine.setProperty('voice', voices[1].id)
                         engine.say(trans.translate(f"{texto}").text)
-                        engine.runAndWait()
                         engine.runAndWait()
                     else:    
                         print("Saindo")
